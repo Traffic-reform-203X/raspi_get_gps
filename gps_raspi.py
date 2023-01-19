@@ -27,7 +27,7 @@ def main():
                         print('=' * 20)
                         print(my_gps.date_string(), tm[0], tm[1], int(tm[2]))
                         print("latitude:", my_gps.latitude[0], ", longitude:", my_gps.longitude[0])
-                        csv_write(tm_now, my_gps.latitude[0], my_gps.longitude[0])
+                        csv_write("{0:02d}:{1:02d}:{2:02d}".format(tm[0], tm[1], tm[2]), my_gps.latitude[0], my_gps.longitude[0])
                         flag = 0
                     else:
                         pass
