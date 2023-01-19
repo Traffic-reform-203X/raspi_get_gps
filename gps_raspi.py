@@ -10,10 +10,11 @@ def main():
     uart = serial.Serial('/dev/serial0', 9600, timeout = 10)
     # gps設定
     my_gps = MicropyGPS(9, 'dd')
+    flag = 1
 
     # 10秒ごとに表示
-    tm_last = 0
-    while True:
+    while (flag):
+        tm_last = 0
         sentence = uart.readline()
         if len(sentence) > 0:
             for x in sentence:
@@ -22,14 +23,17 @@ def main():
                     if stat:
                         tm = my_gps.timestamp
                         tm_now = (tm[0] * 3600) + (tm[1] * 60) + int(tm[2])
-                        if (tm_now - tm_last) >= 10:
-                            # print('=' * 20)
-                            # print(my_gps.date_string(), tm[0], tm[1], int(tm[2]))
-                            # print("latitude:", my_gps.latitude[0], ", longitude:", my_gps.longitude[0])
-                            csv_write(tm_now, my_gps.latitude[0], my_gps.longitude[0])
+                        # if (tm_now - tm_last) >= 10:
+                        print('=' * 20)
+                        print(my_gps.date_string(), tm[0], tm[1], int(tm[2]))
+                        print("latitude:", my_gps.latitude[0], ", longitude:", my_gps.longitude[0])
+                        csv_write(tm_now, my_gps.latitude[0], my_gps.longitude[0])
+                        flag = 0
+                    else:
+                        pass
 
 def csv_write(timestamp, latitude, longitude):
-    with open('csv/data.csv', 'a') as f:
+    with open('data.csv', 'a') as f:
         writer = csv.writer(f)
         writer.writerow([deviceid, timestamp, latitude, longitude])
 
