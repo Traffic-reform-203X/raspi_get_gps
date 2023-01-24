@@ -5,6 +5,7 @@ raspberry pi zeroを用いて、GPSモジュールを制御するプログラム
 ## 参考記事
 
 GPSモジュールとRaspberry Piの接続およびプログラムの参考
+
 [https://zenn.dev/kotaproj/books/raspberrypi-tips/viewer/370_kiso_gps](https://zenn.dev/kotaproj/books/raspberrypi-tips/viewer/370_kiso_gps)
 
 crontabでの定期実行
